@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:epsi_shop/bo/article.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +13,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
+        title: Text("EPSI Shop"),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
           Badge(
             label: Text("${context.watch<Cart>().items.length}"),

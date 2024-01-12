@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../bo/cart.dart';
@@ -41,7 +42,7 @@ class EmptyCart extends StatelessWidget {
         ),
         Spacer(),
         Text("Votre panier est actuellement vide"),
-        Icon(Icons.image),
+        Icon(Icons.shopping_cart),
         Spacer()
       ],
     );
@@ -55,6 +56,7 @@ class ListCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Cart>(
         builder: (context, cart, _) => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,6 +87,9 @@ class ListCart extends StatelessWidget {
                             ),
                           )),
                 ),
+                FilledButton(
+                    onPressed: () => context.go('/paiement'),
+                    child: Text("Procéder au paiement"))
               ],
             ));
   }
