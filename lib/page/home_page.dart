@@ -23,9 +23,10 @@ class HomePage extends StatelessWidget {
                 onPressed: () => context.go('/cart'),
                 icon: const Icon(Icons.shopping_cart)),
           ),
-          IconButton(
-              onPressed: () => context.go("/about-us"),
-              icon: Icon(Icons.info_outline))
+          //map du précédant projet
+          // IconButton(
+          //     onPressed: () => context.go("/about-us"),
+          //     icon: Icon(Icons.info_outline))
         ],
       ),
       body: FutureBuilder<List<Article>>(

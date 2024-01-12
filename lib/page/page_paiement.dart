@@ -102,10 +102,10 @@ class PagePaiement extends StatelessWidget {
               "Méthode de paiement",
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
+            //CardList(), //version dynamique presque fonctionnel mais pas joli
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CardList(),
                 Card(
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -164,6 +164,7 @@ class PagePaiement extends StatelessWidget {
                 )
               ],
             ),
+            Text('En cliquant sur "confirmer achat" ...'),
             FilledButton(onPressed:() => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Votre commande a été validé', textAlign: TextAlign.center,))), child: Text("Confirmer l'achat"))
           ],
         ));
@@ -185,8 +186,7 @@ class _CardListState extends State<CardList> {
       children: [
         ColorCard(
           color: Colors.blue,
-          text: 'Texte 1',
-
+          icon: FontAwesomeIcons.ccVisa,
           isSelected: selectedCardIndex == 0,
           onTap: () {
             handleCardTap(0);
@@ -194,7 +194,7 @@ class _CardListState extends State<CardList> {
         ),
         ColorCard(
           color: Colors.green,
-          text: 'Texte 2',
+          icon: FontAwesomeIcons.ccMastercard,
           isSelected: selectedCardIndex == 1,
           onTap: () {
             handleCardTap(1);
@@ -202,7 +202,7 @@ class _CardListState extends State<CardList> {
         ),
         ColorCard(
           color: Colors.red,
-          text: 'Texte 3',
+          icon: FontAwesomeIcons.ccAmex,
           isSelected: selectedCardIndex == 2,
           onTap: () {
             handleCardTap(2);
@@ -214,24 +214,20 @@ class _CardListState extends State<CardList> {
 
   void handleCardTap(int index) {
     setState(() {
-      if (selectedCardIndex == index) {
-        selectedCardIndex = -1;
-      } else {
-        selectedCardIndex = index;
-      }
+      selectedCardIndex = index;
     });
   }
 }
 
 class ColorCard extends StatelessWidget {
   final Color color;
-  final String text;
+  final IconData icon;
   final bool isSelected;
   final VoidCallback onTap;
 
   const ColorCard({
     required this.color,
-    required this.text,
+    required this.icon,
     required this.isSelected,
     required this.onTap,
   });
@@ -243,16 +239,21 @@ class ColorCard extends StatelessWidget {
       child: Stack(
         children: [
           Card(
-            color: isSelected ? color.withOpacity(0.8) : color,
-            child: Container(
-              width: 100,
-              height: 100,
-              alignment: Alignment.center,
-              child: Text(
-                text,
-                style: TextStyle(
+            elevation: isSelected ? 0 : 4, // Élévation différente pour la carte sélectionnée
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: Theme.of(context).colorScheme.outline),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: 90,
+                height: 90,
+                alignment: Alignment.center,
+                child: FaIcon(
+                  icon,
+                  size: 48.0,
                   color: isSelected ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -263,7 +264,7 @@ class ColorCard extends StatelessWidget {
               right: -10.0,
               child: Container(
                 padding: EdgeInsets.all(4.0),
-                  child: FaIcon(Icons.check_circle, color: Theme.of(context).colorScheme.inversePrimary)
+                child: FaIcon(Icons.check_circle, color: Theme.of(context).colorScheme.inversePrimary),
               ),
             ),
         ],

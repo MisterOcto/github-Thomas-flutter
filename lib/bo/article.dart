@@ -12,7 +12,17 @@ class Article {
     required this.prix,
     required this.categorie,
   });
+
   String getPrixEuro() => "${prix}€";
+
+  bool isArticleInformatique(Article article){
+    if(article.categorie == "informatique"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
   Map<String, dynamic> toMap() {
     return {

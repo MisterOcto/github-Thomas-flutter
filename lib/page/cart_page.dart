@@ -11,7 +11,7 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("EPSI Shop"),
+        title: const Text("Panier"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Padding(
